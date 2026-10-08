@@ -1,4 +1,5 @@
 from collections import Counter
+import json
 class Album:
     def __init__(self, album, artist, genre, country, year, rating):
         self.album = album
@@ -26,10 +27,11 @@ Album("Power Windows","Rush","Prog Rock","Canada",1985,8),
 Album("Moving Pictures","Rush","Prog Rock","Canada",1981,9.5),
 Album("Permanent Waves","Rush","Prog Rock","Canada",1980,8.5),
 Album("Trash","Alice Cooper","Glam Metal","USA",1989,7.5),
-Album("Hey Stoopid","Alice Cooper","Pop Metal","USA",1991,8.5),
+Album("Hey Stoopid","Alice Cooper","Pop Metal","USA",1991,7),
 Album("Raise Your Fist and Yell","Alice Cooper","Glam Metal","USA",1987,6),
 Album("Constrictor","Alice Cooper","Glam Metal","USA",1986,5),
 Album("Images and Words","Dream Theater","Prog Metal","USA",1992,9),
+Album("Electric Ladyland","Jimi Hendrix","Psychedelic Rock","USA",1968,8.5),
 Album("Are You Experienced?","Jimi Hendrix","Psychedelic Rock","USA",1967,9),
 Album("Axis: Bold as Love","Jimi Hendrix","Psychedelic Rock","USA",1967,8),
 Album("Cheap Thrills","Big Brother and the Holding Company","Blues Rock","USA",1968,7),
@@ -83,18 +85,18 @@ Album("Summer Days (And Summer Nights!!)","The Beach Boys","Pop","USA",1965,8),
 Album("Surf's Up","The Beach Boys","Psychedelic Pop","USA",1971,9),
 Album("Friends","The Beach Boys","Pop","USA",1968,5.5),
 Album("Love You","The Beach Boys","Pop","USA",1977,7),
-Album("Smile","Brian Wilson","Psychedelic Pop","USA",2004,9.5),
+Album("Brian Wilson Presents Smile","Brian Wilson","Psychedelic Pop","USA",2004,9.5),
 Album("Younger Than Yesterday","The Byrds","Psychedelic Rock","USA",1967,8.5),
 Album("Fifth Dimension","The Byrds","Psychedelic Rock","USA",1966,7),
 Album("Arthur","The Kinks","Psychedelic Rock","UK",1969,7),
 Album("Van Halen","Van Halen","Hard Rock","USA",1978,8),
 Album("Hounds of Love","Kate Bush","Art Pop","UK",1985,10),
 Album("So","Peter Gabriel","Art Pop","UK",1986,9),
-Album("Peter Gabriel","Peter Gabriel","Art Rock","UK",1980,8),
+Album("Melt","Peter Gabriel","Art Rock","UK",1980,8),
 Album("Rust In Peace","Megadeth","Thrash Metal","USA",1990,8.5),
-Album("Youthanasia","Megadeth","Thrash Metal","USA",1994,9),
+Album("Youthanasia","Megadeth","Thrash Metal","USA",1994,8),
 Album("Cryptic Writings","Megadeth","Thrash Metal","USA",1997,5),
-Album("Final Fantasy IX OST","Nobuo Uematsu","VG OST","Japan",2000,10),
+Album("Final Fantasy IX OST","Nobuo Uematsu","VG OST","Japan",2000,9),
 Album("A Single Man","Abel Korzeniowski","OST","Poland",2009,9),
 Album("Edward Scissorhands","Danny Elfman","OST","USA",1990,8),
 Album("Sleepy Hollow","Danny Elfman","OST","USA",1999,8),
@@ -108,7 +110,7 @@ Album("The Psychedelic Sounds of the 13th Floor Elevators","13th Floor Elevators
 Album("Easter Everywhere","13th Floor Elevators","Psychedelic Rock","USA",1967,4.5),
 Album("Definitely Maybe","Oasis","Britpop","UK",1994,8.5),
 Album("(What's the Story) Morning Glory?","Oasis","Britpop","UK",1995,8),
-Album("Sing When You're Winning","Robbie Williams","Pop","UK",2000,8),
+Album("Sing When You're Winning","Robbie Williams","Pop","UK",2000,6.5),
 Album("Noel Gallagher's High Flying Birds","Noel Gallagher's High Flying Birds","Rock Pop","UK",2011,7.5),
 Album("Lost Horizons","Abney Park","Industrial Rock","USA",2008,5),
 Album("Æther Shanties","Abney Park","Steampunk","USA",2009,6.5),
@@ -151,7 +153,7 @@ Album("Aske","Burzum","Black Metal","Norway",1993, 4.5),
 Album("Burzum","Burzum","Black Metal","Norway",1992, 4),
 Album("Hvis lyset tar oss","Burzum","Black Metal","Norway",1994, 3),
 Album("Pentagram","Gorgoroth","Black Metal","Norway",1994, 2),
-Album("Metal Music Machine","Lou Reed","Noise","USA",1975,1),
+Album("Metal Machine Music","Lou Reed","Noise","USA",1975,1),
 Album("Sons of Northern Darkness","Immortal","Black Metal","Norway",2002,7.5),
 Album("Diabolical Fullmoon Mysticism","Immortal","Black Metal","Norway",1992,4),
 Album("Pure Holocaust","Immortal","Black Metal","Norway",1993,5),
@@ -164,10 +166,14 @@ Album("A Love Supreme","John Coltrane","Modal Jazz","USA",1965,8),
 Album("Om","John Coltrane","Free Jazz","USA",1968,3),
 Album("Giant Steps","John Coltrane","Jazz","USA",1960,9),
 Album("Lush Life","John Coltrane","Jazz","USA",1961,5),
-Album("Silent Hill OST","Akira Yamaoka","Experimental","Japan",1999,6.5),
+Album("Silent Hill OST","Akira Yamaoka","Experimental","Japan",1999,6),
 Album("Clics modernos","Charly Garcia","Art Pop","Argentina",1983,9),
 Album("After chabon","Sumo","Post Punk","Argentina",1987,8.5),
-Album("Canción Animal","Soda Stereo","Alternative Rock","Argentina",1990,8),
+Album("Soda Stereo", "Soda Stereo", "New Wave", "Argentina", 1984, 4.5),
+Album("Doble Vida", "Soda Stereo", "New Wave", "Argentina", 1988, 6),
+Album("Signos", "Soda Stereo", "New Wave", "Argentina", 1986, 7.5),
+Album("Canción Animal","Soda Stereo","Alternative Rock","Argentina",1990,8.5),
+Album("Dynamo", "Soda Stereo", "Shoegaze", "Argentina", 1992, 9),
 Album("Fuerza Natural","Gustavo Cerati","Folk Rock","Argentina",2009,8.5),
 Album("Dawn of the Deli Creeps","Deli Creeps","Alternative Metal","USA",2005,6.5),
 Album("Colma","Buckethead","Ambient","USA",1998,9),
@@ -204,7 +210,7 @@ Album("Diary Of A Madman","Ozzy Osbourne","Heavy Metal","UK",1981,8.5),
 Album("Bark At The Moon","Ozzy Osbourne","Heavy Metal","UK",1983,5),
 Album("Black Rain","Ozzy Osbourne","Heavy Metal","UK",2007,4),
 Album("Metal Health","Quiet Riot","Hard Rock","USA",1983,6),
-Album("Imaginations from the Other Side","Blind Guardian","Power Metal","German",1995,9),
+Album("Imaginations from the Other Side","Blind Guardian","Power Metal","Germany",1995,9),
 Album("Películas","La Máquina de Hacer Pájaros","Prog Rock","Argentina",1977,7.5),
 Album("El jardín de los presentes","Invisible","Prog Rock","Argentina",1976,8),
 Album("Los Delirios Del Mariscal","Crucis","Prog Rock","Argentina",1976,8.5),
@@ -235,4 +241,115 @@ Album("Loveless", "My Bloody Valentine", "Shoegaze", "Ireland", 1991, 9),
 Album("Souvlaki", "Slowdive", "Shoegaze", "UK", 1993, 8),
 Album("Nowhere", "Ride", "Shoegaze", "UK", 1990,7),
 Album("Selling England by the Pound", "Genesis", "Prog Rock", "UK", 1973, 8),
+Album("Another Green World", "Brian Eno", "Ambient", "UK", 1975,8),
+Album("Spirit of Eden", "Talk Talk", "Post Rock", "UK", 1988,7),
+Album("Mezzanine", "Massive Attack", "Trip Hop", "UK", 1998, 8.5),
+Album("Purple Rain", "Prince", "Pop", "USA", 1984, 8),
+Album("Pink Moon", "Nick Drake", "Folk", "UK", 1972, 7.5),
+Album("Trans-Europe Express", "Kraftwerk", "Synthpop", "Germany", 1977, 9),
+Album("Alturas de Macchu Picchu", "Los Jaivas", "Prog Rock", "Chile", 1981, 8.5),
+Album("Tango", "Tanguito", "Folk", "Argentina", 1973, 7.5),
+Album("Spinettalandia y Sus Amigos", "Luis Alberto Spinetta", "Psychedelic Rock", "Argentina", 1971, 3.5),
+Album("Pelusón Of Milk", "Luis Alberto Spinetta", "Alternative Rock", "Argentina", 1991, 6.5),
+Album("Blue Hawaii", "Elvis Presley", "Pop", "USA", 1961, 1),
+Album("Rising Force", "Yngwie Malmsteen", "Heavy Metal", "Sweden", 1984, 7),
+Album("Out to Lunch!", "Eric Dolphy", "Avant-Garde Jazz", "USA", 1964, 4.5),
+Album("Hot Rats", "Frank Zappa", "Jazz Fusion", "USA", 1969, 8),
+Album("Minecraft – Volume Alpha", "C418", "Ambient", "Germany", 2011, 8),
+Album("The Velvet Underground & Nico", "The Velvet Underground", "Art Rock", "USA", 1967, 6),
+Album("Disintegration", "The Cure", "Post Punk",  "UK", 1989, 8),
+Album("Kid A", "Radiohead", "Experimental", "UK", 2000, 9),
+Album("Amnesiac", "Radiohead", "Experimental", "UK", 2001, 6.5),
+Album("Scott 4", "Scott Walker", "Pop", "UK", 1969, 6),
+Album("We're Only in It for the Money", "Mothers Of Invention", "Psychedelic Rock", "USA", 1968, 4),
+Album("Crash Bandicoot 3","Josh Mancell","VG OST","USA",1998,7),
+Album("Crash Team Racing","Josh Mancell","VG OST","USA",1999,8),
+Album("Final Fantasy XII","Hitoshi Sakimoto","VG OST","Japan",2006,8),
+Album("Final Fantasy X-2","Noriko Matsued","VG OST","Japan",2003,5.5),
+Album("Katamari Damacy","Yuu Miyake","VG OST","Japan",2004,6.5),
+Album("Okami","Masami Ueda","VG OST","Japan",2006,7),
+Album("Resident Evil 2","Masami Ueda","VG OST","Japan",1998,6.5),
+Album("A Series of Unfortunate Events","Thomas Newman","OST","USA",2004,6),
+Album("Harry Potter and the Philosopher's Stone","John Williams","OST","UK",2001,9),
+Album("Luzbelito","Patricio Rey y Sus Redonditos de Ricota","Alternative Rock","Argentina",1996,8),
+Album("Oktubre","Patricio Rey y Sus Redonditos de Ricota","Post Punk","Argentina",1986,8.5),
+Album("Artaud", "Pescado Rabioso", "Art Rock", "Argentina", 1973, 7),
+Album("In the Court of the Crimson King", "King Crimson", "Prog Rock", "UK", 1969, 9),
+Album("Vespertine", "Björk", "Art Pop", "Iceland", 2001, 6.5),
+Album("Almendra", "Almendra", "Psychedelic Pop", "Argentina", 1970, 7.5),
+Album("La Grasa De Las Capitales", "Serú Girán", "PRog Rock", "Argentina", 1979, 8.5),
 ]
+
+ranking_artists = Counter(album.artist for album in album_list)
+ranking_genres = Counter(album.genre for album in album_list)
+ranking_countries = Counter(album.country for album in album_list)
+ranking_years = Counter(album.year for album in album_list)
+ranking_ratings = Counter(album.rating for album in album_list)
+
+ranking_decade = Counter((album.year // 10) * 10 for album in album_list)
+ranking_century = Counter((album.year // 100) * 100 for album in album_list)
+
+top_rank = max(album_list, key=lambda album: album.rating)
+
+print("\n=== RANKING ARTISTS ===")
+for i, (artist, cantidad) in enumerate(ranking_artists.most_common(), start=1):
+    print(f"{i}. {artist}: {cantidad}")
+
+print("\n=== RANKING GENRES ===")
+for i, (genre, cantidad) in enumerate(ranking_genres.most_common(), start=1):
+    print(f"{i}. {genre}: {cantidad}")
+
+print("\n=== RANKING COUNTRIES ===")
+for i, (country, cantidad) in enumerate(ranking_countries.most_common(), start=1):
+    print(f"{i}. {country}: {cantidad}")
+
+print("\n=== RANKING YEARS ===")
+for i, (year, cantidad) in enumerate(ranking_years.most_common(), start=1):
+    print(f"{i}. {year}: {cantidad}")
+
+print("\n=== RANKING BY RATING ===")
+sorted_albums = sorted(album_list, key=lambda album: album.rating, reverse=True)
+for i, album in enumerate(sorted_albums, start=1):
+    print(f"{i}. [{album.rating}] {album.album} - {album.artist} ({album.year})")
+
+print("\n=== RANKING DECADE ===")
+for i, (decade, cantidad) in enumerate(ranking_decade.most_common(), start=1):
+    print(f"{i}. {decade}: {cantidad}")
+
+print("\n=== RANKING CENTURY ===")
+for i, (century, cantidad) in enumerate(ranking_century.most_common(), start=1):
+    print(f"{i}. {century}: {cantidad}")
+
+
+################################################
+# def load_from_json(filename="albums.json"):
+#     with open(filename, "r", encoding="utf-8") as f:
+#         data = json.load(f)
+#     return [Album(
+#         d["album"],
+#         d["artist"],
+#         d["genre"],
+#         d["country"],
+#         d["year"],
+#         d["rating"]
+#     ) for d in data]
+#
+# album_list = load_from_json()
+# print(f"{len(album_list)} albums loaded.")
+#
+# def export_to_json(album_list, filename="albums.json"):
+#     data = []
+#     for a in album_list:
+#         data.append({
+#             "album": a.album,
+#             "artist": a.artist,
+#             "genre": a.genre,
+#             "country": a.country,
+#             "year": a.year,
+#             "rating": a.rating
+#         })
+#     with open(filename, "w", encoding="utf-8") as f:
+#         json.dump(data, f, indent=2, ensure_ascii=False)
+#     print(f"{len(data)} albums exported to {filename}")
+#
+# export_to_json(album_list)
