@@ -299,6 +299,9 @@ Album("Space Oddity", "David Bowie", "Folk", "UK", 1969, 5),
 Album("Beatles For Sale", "The Beatles", "Pop", "UK", 1964, 4.5),
 Album("The Kinks Are the Village Green Preservation Society", "The Kinks", "Pop", "UK", 1968, 5.5),
 Album("Beggars Banquet", "Rolling Stones", "Blues Rock", "UK", 1968, 7),
+Album("Trout Mask Replica", "Captain Beefheart and His Magic Band", "Experimental", "USA", 1969, 1.5),
+Album("Etazhi", "Molchat Doma", "Post Punk", "Belarus", 2018, 7.5),
+Album("Gruppa Krovi", "Kino", "Post Punk", "Russia", 1988, 7),
 ]
 
 total_albums = len(album_list)
