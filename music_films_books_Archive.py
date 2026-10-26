@@ -304,6 +304,9 @@ Album("Etazhi", "Molchat Doma", "Post Punk", "Belarus", 2018, 7.5),
 Album("Gruppa Krovi", "Kino", "Post Punk", "Russia", 1988, 7),
 Album("Wild Honey", "The Beach Boys", "Pop", "USA", 1967, 6.5),
 Album("Sunflower", "The Beach Boys", "Pop", "USA", 1970, 8),
+Album("With The Beatles", "The Beatles", "Pop", "UK", 1963, 5),
+Album("Hex", "Bark Psychosis", "Post Rock", "UK", 1994, 7.5),
+Album("Tin Drum", "Japan", "Art Pop", "UK", 1981, 6.5),
 ]
 
 total_albums = len(album_list)
