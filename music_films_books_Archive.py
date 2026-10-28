@@ -307,6 +307,9 @@ Album("Sunflower", "The Beach Boys", "Pop", "USA", 1970, 8),
 Album("With The Beatles", "The Beatles", "Pop", "UK", 1963, 5),
 Album("Hex", "Bark Psychosis", "Post Rock", "UK", 1994, 7.5),
 Album("Tin Drum", "Japan", "Art Pop", "UK", 1981, 6.5),
+Album("Plastic Ono Band", "John Lennon", "Art Rock", "UK", 1971, 7.5),
+Album("Imagine", "John Lennon", "Art Rock", "UK", 1971, 8.5),
+Album("Mind Games", "John Lennon", "Pop", "UK", 1973, 5.5),
 ]
 
 total_albums = len(album_list)
