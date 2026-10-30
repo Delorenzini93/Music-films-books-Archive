@@ -310,6 +310,11 @@ Album("Tin Drum", "Japan", "Art Pop", "UK", 1981, 6.5),
 Album("Plastic Ono Band", "John Lennon", "Art Rock", "UK", 1971, 7.5),
 Album("Imagine", "John Lennon", "Art Rock", "UK", 1971, 8.5),
 Album("Mind Games", "John Lennon", "Pop", "UK", 1973, 5.5),
+Album("Walls And Bridges", "John Lennon", "Pop", "UK", 1974, 6),
+Album("McCartney", "Paul McCartney", "Pop", "UK", 1970, 3),
+Album("Led Zeppelin I", "Led Zeppelin", "Hard Rock", "UK", 1969, 7),
+Album("Led Zeppelin II", "Led Zeppelin", "Hard Rock", "UK", 1969, 8.5),
+Album("Led Zeppelin III", "Led Zeppelin", "Hard Rock", "UK", 1970, 6.5),
 ]
 
 total_albums = len(album_list)
