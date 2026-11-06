@@ -329,6 +329,13 @@ Album("All Born Screaming", "St Vincent", "Art Rock", "USA", 2024, 8.5),
 Album("David Bowie", "David Bowie", "Pop", "UK", 1967, 3),
 Album("The Joshua Tree", "U2", "Alternative Rock", "Ireland", 1987, 9),
 Album("Achtung Baby", "U2", "Alternative Rock" ,"Ireland", 1991, 8),
+Album("Michigan", "Sufjan Stevens", "Indie Folk", "USA", 2003, 6.5),
+Album("Hot Fuss", "The Killers", "Alternative Rock", "USA", 2004, 7),
+Album("The Cars", "The Cars", "New Wave", "USA", 1978, 8,5),
+Album("Illinoise", "Sufjan Stevens", "Indie Pop", "USA", 2005, 8),
+Album("Thriller", "Michael Jackson", "Pop", "USA", 1982, 7.5),
+Album("Car", "Peter Gabriel", "Art Rock", "UK", 1977, 6.5),
+Album("Scratch", "Peter Gabriel", "Art Rock", "UK", 1978, 5),
 ]
 
 total_albums = len(album_list)
