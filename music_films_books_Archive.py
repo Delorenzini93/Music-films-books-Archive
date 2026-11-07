@@ -1,4 +1,7 @@
 from collections import Counter
+from collections import defaultdict
+from Notas import notas_artistas, notas_discos
+
 import json
 class Album:
     def __init__(self, album, artist, genre, country, year, rating):
@@ -8,6 +11,18 @@ class Album:
         self.country = country
         self.year = year
         self.rating = rating
+
+    def __str__(self):
+        return f"'{self.album}' by {self.artist}, a {self.genre} release from {self.country} in {self.year} | Rating: {self.rating}"
+
+    def __repr__(self):
+        return f"Album({self.album!r}, {self.artist!r}, {self.year})"
+
+    def __eq__(self, other):
+        return self.album == other.album and self.artist == other.artist
+
+    def __lt__(self, other):
+        return self.rating < other.rating
 
 album_list = [
 Album("Please Please Me","The Beatles","Pop","UK",1963,6),
@@ -331,11 +346,18 @@ Album("The Joshua Tree", "U2", "Alternative Rock", "Ireland", 1987, 9),
 Album("Achtung Baby", "U2", "Alternative Rock" ,"Ireland", 1991, 8),
 Album("Michigan", "Sufjan Stevens", "Indie Folk", "USA", 2003, 6.5),
 Album("Hot Fuss", "The Killers", "Alternative Rock", "USA", 2004, 7),
-Album("The Cars", "The Cars", "New Wave", "USA", 1978, 8,5),
+Album("The Cars", "The Cars", "New Wave", "USA", 1978, 8.5),
 Album("Illinoise", "Sufjan Stevens", "Indie Pop", "USA", 2005, 8),
 Album("Thriller", "Michael Jackson", "Pop", "USA", 1982, 7.5),
 Album("Car", "Peter Gabriel", "Art Rock", "UK", 1977, 6.5),
 Album("Scratch", "Peter Gabriel", "Art Rock", "UK", 1978, 5),
+Album("Carrie & Lowell", "Sufjan Stevens", "Indie Folk", "USA", 2015, 8),
+Album("Diamond Life", "Sade", "Smooth Soul", "UK", 1984, 9),
+Album("Pink Flag", "Wire", "Punk", "UK", 1977,7.5),
+Album("Divididos Por La Felicidad", "Sumo", "Post Punk", "Argentina", 1985, 6),
+Album("Llegando Los Monos", "Sumo", "Post Punk", "Argentina", 1986, 8.5),
+Album("Graduation", "Kanye West", "Hip Hop", "USA", 2007, 9),
+Album("Superficies De Placer", "Virus", "New Wave", "Argentina", 1987, 7.5),
 ]
 
 total_albums = len(album_list)
@@ -345,10 +367,16 @@ ranking_countries = Counter(album.country for album in album_list)
 ranking_years = Counter(album.year for album in album_list)
 ranking_ratings = Counter(album.rating for album in album_list)
 
+genre_ratings = defaultdict(list)
+for album in album_list:
+    genre_ratings[album.genre].append(album.rating)
+
+avg_by_genre = {genre: sum(ratings)/len(ratings) for genre, ratings in genre_ratings.items()}
+
 ranking_decade = Counter((album.year // 10) * 10 for album in album_list)
 ranking_century = Counter((album.year // 100) * 100 for album in album_list)
 
-top_rank = max(album_list, key=lambda album: album.rating)
+top_rank = max(album_list)
 
 print("\n=== RANKING ARTISTS ===")
 for i, (artist, cantidad) in enumerate(ranking_artists.most_common(), start=1):
@@ -367,7 +395,7 @@ for i, (year, cantidad) in enumerate(ranking_years.most_common(), start=1):
     print(f"{i}. {year}: {cantidad}")
 
 print("\n=== RANKING BY RATING ===")
-sorted_albums = sorted(album_list, key=lambda album: album.rating, reverse=True)
+sorted_albums = sorted(album_list, reverse=True)
 for i, album in enumerate(sorted_albums, start=1):
     print(f"{i}. [{album.rating}] {album.album} - {album.artist} ({album.year})")
 
@@ -379,8 +407,46 @@ print("\n=== RANKING CENTURY ===")
 for i, (century, cantidad) in enumerate(ranking_century.most_common(), start=1):
     print(f"{i}. {century}: {cantidad}")
 
+print("\n=== AVG RATING BY GENRE ===")
+for genre, avg in sorted(avg_by_genre.items(), key=lambda x: x[1], reverse=True):
+    print(f"{genre}: {avg:.2f} ({len(genre_ratings[genre])} albums)")
+
 print("\n=== TOTAL ALBUMS ===")
 print(f"{total_albums}")
+
+artist = input("Enter artist name to explore: ").strip()
+print(f"\n=== ALBUMS by {artist.upper()} by RANKING ===")
+ranking_discografia_de_x_artista = [album for album in album_list if album.artist.lower() == artist.lower()]
+
+if ranking_discografia_de_x_artista:
+    sorted_albums = sorted(ranking_discografia_de_x_artista, reverse=True)
+    for i, album in enumerate(sorted_albums, start=1):
+        print(f"{i}. [{album.rating}] {album.album} - {album.artist} ({album.year})")
+
+    if artist.title() in notas_artistas:
+        ver = input(f"\nThere's info about {artist}. Want to read it? (y/n): ")
+        if ver == "y":
+            print(f"\n{notas_artistas[artist.title()]}")
+
+    album_con_nota = [a for a in sorted_albums if a.album in notas_discos]
+    if album_con_nota:
+        ver = input(f"\nThere's notes on some albums. Want to explore them? (y/n): ")
+        if ver == "y":
+            for a in album_con_nota:
+                print(f"\n{a.album}: {notas_discos[a.album]}")
+else:
+    print("Artist not found")
+
+
+
+seleccion = input("Enter a number to explore album in catalog (0-332): ")
+try:
+    seleccion = int(seleccion)
+    print(album_list[seleccion])
+except ValueError:
+    print("Enter an integer number from 0 to 332")
+except IndexError:
+    print("Number out of range, enter a number from 0 to 332")
 ################################################
 # def load_from_json(filename="albums.json"):
 #     with open(filename, "r", encoding="utf-8") as f:
